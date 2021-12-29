@@ -106,15 +106,17 @@ def warpByOriginImage( org, A,B,C,D ):
 
 def nothing(x): pass
 
-cv2.namedWindow("Trackbars")
-cv2.resizeWindow("Trackbars", 360, 240)
-cv2.createTrackbar("Threshold1", "Trackbars", DEFAULT_THRES1,255, nothing)
-cv2.createTrackbar("Threshold2", "Trackbars", DEFAULT_THRES2, 255, nothing)
-cv2.createTrackbar("Blur", "Trackbars", DEFAULT_BLUR, 20, nothing)
-cv2.createTrackbar("Thick", "Trackbars", DEFAULT_THICK, 20, nothing)
 
+def CreateTrackbarForScan():
+	cv2.namedWindow("Trackbars")
+	cv2.resizeWindow("Trackbars", 360, 240)
+	cv2.createTrackbar("Threshold1", "Trackbars", DEFAULT_THRES1,255, nothing)
+	cv2.createTrackbar("Threshold2", "Trackbars", DEFAULT_THRES2, 255, nothing)
+	cv2.createTrackbar("Blur", "Trackbars", DEFAULT_BLUR, 20, nothing)
+	cv2.createTrackbar("Thick", "Trackbars", DEFAULT_THICK, 20, nothing)
 
 def run_on_webcam( ):
+	CreateTrackbarForScan()
 	cap = cv2.VideoCapture(0)
 
 	processingImage = np.array([])
@@ -128,9 +130,12 @@ def run_on_webcam( ):
 		
 		if cv2.waitKey(1) == ord('q'):
 			break
+	
+	cv2.destroyAllWindows()
 	return processingImage, result
 
 def run_by_path( path ):
+	CreateTrackbarForScan()
 	# do 
 	origin_img_color = cv2.imread( path)
 
@@ -144,6 +149,7 @@ def run_by_path( path ):
 		if cv2.waitKey(1) == ord('q'):
 			break
 	
+	cv2.destroyAllWindows()
 	return processingImage, result
 
 def run_one_loop( origin_img_color ):

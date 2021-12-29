@@ -6,6 +6,7 @@ import cv2
 path = "test.jpg"
 path = "img/1.jpg"
 path = "img/IMG_1128.JPG"
+path = "monhocRun/monhoc.jpg"
 path = "img/IMG_1135.JPG"
 #nhan Q de ket thuc ham cs321.run()
 process, result = cs231.run_by_path( path )
